@@ -3,6 +3,7 @@
   "displayName": "CmakeAssistant`",
   "description": "",
   "version": "0.0.1",
+  "repository": "https://github.com/St0kk/CmakeAssistant.git",
   "engines": {
     "vscode": "^1.106.0"
   },
