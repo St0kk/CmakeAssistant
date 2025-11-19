@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 		Отправляет в функцию Command комманду: "cmake -B build" - сборка проекта
 		Запрашивает у пользователя имя программы(указывается в CmakeList)
 		Выводит ошибку, если имя программы не было полученно
-		Отвправляет в функцию Command комманду: "build/bin/${programName}" - запуск программы с указанным именем
+		Отвправляет в функцию Command комманду: "build/bin/${programName}" - запуск программы с указанным именем`
 		 */
 		Command("cmake -B build");
 		const programName = await vscode.window.showInputBox({
