@@ -1,6 +1,6 @@
 {
-  "name": "usefulextension",
-  "displayName": "UsefulExtension",
+  "name": "cmakeassistant",
+  "displayName": "CmakeAssistant`",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -14,10 +14,30 @@
   "contributes": {
     "commands": [
       {
-        "command": "usefulextension.helloWorld",
-        "title": "Hello World"
+        "command": "CmakeBuildNRun",
+        "icon": "./assets/arrow.png",
+        "title": "Cmake: Build and Run"
+      },
+      {
+        "command": "CmakeBuildNTest",
+        "icon" : "./assets/cmake.png",
+        "title": "Cmake: Build and Test"
       }
-    ]
+    ],
+    "menus": {
+      "touchBar": [
+        {
+          "command": "CmakeBuildNRun",
+          "group": "CmakeAssistant",
+          "id" : "2"
+        },
+        {
+          "command": "CmakeBuildNTest",
+          "group": "CmakeAssistant",
+          "id": "1"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

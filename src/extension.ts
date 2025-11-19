@@ -1,26 +1,55 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "usefulextension" is now active!');
+	function Command (command : string) {
+		/* 
+		Открывает терминал "ExtCommandTerminal", если такой есть или создает его, вводит в него комманду.
+		Принимает: command (string) : комманду
+		*/
+		let terminal = vscode.window.terminals.find(terminal => terminal.name === "ExtCommandTerminal");
+		if(!terminal) {
+			terminal = vscode.window.createTerminal("ExtCommandTerminal");
+		}
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('usefulextension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from UsefulExtension!');
-	});
+		terminal.show();
+		terminal.sendText(command);
+	}
 
-	context.subscriptions.push(disposable);
+	let CmakeBuildNTest = vscode.commands.registerCommand("CmakeBuildNTest", () => {
+		/*
+		Отправляет в функцию Command комманды: 
+		"cmake -B build" - сборка проекта
+		"cmake --build build" - сборка тестов
+		"ctest -V --test-dir build" - запуск тестов в дирректории build
+		*/
+		Command("cmake -B build");
+		Command("cmake --build build");
+		Command("ctest -V --test-dir build");
+	})
+
+	let CmakeBuildNRun = vscode.commands.registerCommand("CmakeBuildNRun", async () => {
+		/*
+		Отправляет в функцию Command комманду: "cmake -B build" - сборка проекта
+		Запрашивает у пользователя имя программы(указывается в CmakeList)
+		Выводит ошибку, если имя программы не было полученно
+		Отвправляет в функцию Command комманду: "build/bin/${programName}" - запуск программы с указанным именем
+		 */
+		Command("cmake -B build");
+		const programName = await vscode.window.showInputBox({
+			placeHolder: "Programm name",
+			prompt: "Write cmake program name"
+		});
+
+		if(!programName) {
+			vscode.window.showErrorMessage("No program name");
+			return;
+		} 
+			
+		Command(`build/bin/${programName}`);
+	})
+
+	
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
