@@ -34,4 +34,4 @@
    3. **Собрать расширение**
       - Ввести команду `vsce package`
    4. **Установить расширение через меню Extentions**
-      -Extentions - три точки - instal from vsix
+      - Extentions - три точки - instal from vsix
