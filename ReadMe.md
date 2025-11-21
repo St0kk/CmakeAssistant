@@ -12,13 +12,14 @@
 ### Доступные команды:
 
 1. **Cmake: Build and Test**
-   - Сборка проекта: `cmake -B build`
-   - Сборка тестов: `cmake --build build`
+   - Создание папки build: `cmake -B build`
+   - Сборка проекта: `cmake --build build`
    - Запуск тестов: `ctest -V --test-dir build`
 
 2. **Cmake: Build and Run**
-   - Сборка проекта: `cmake -B build`
    - Запрос имени программы (указывается в CMakeLists.txt)
+   - Создание папки build: `cmake -B build`
+   - Сборка проекта: `cmake --build build`
    - Запуск программы: `build/bin/${programName}`
 
 ## Требования

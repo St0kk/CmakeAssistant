@@ -19,8 +19,8 @@ export function activate(context: vscode.ExtensionContext) {
 	let CmakeBuildNTest = vscode.commands.registerCommand("CmakeBuildNTest", () => {
 		/*
 		Отправляет в функцию Command комманды: 
-		"cmake -B build" - сборка проекта
-		"cmake --build build" - сборка тестов
+		Отправляет в функцию Command комманду: "cmake -B build" - создание папки build
+		Отправляет в функцию Command комманду: "cmake --build build" - сбоока проекта
 		"ctest -V --test-dir build" - запуск тестов в дирректории build
 		*/
 		Command("cmake -B build");
@@ -30,12 +30,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let CmakeBuildNRun = vscode.commands.registerCommand("CmakeBuildNRun", async () => {
 		/*
-		Отправляет в функцию Command комманду: "cmake -B build" - сборка проекта
 		Запрашивает у пользователя имя программы(указывается в CmakeList)
 		Выводит ошибку, если имя программы не было полученно
+		Отправляет в функцию Command комманду: "cmake -B build" - создание папки build
+		Отправляет в функцию Command комманду: "cmake --build build" - сбоока проекта
 		Отвправляет в функцию Command комманду: "build/bin/${programName}" - запуск программы с указанным именем`
 		 */
-		Command("cmake -B build");
 		const programName = await vscode.window.showInputBox({
 			placeHolder: "Programm name",
 			prompt: "Write cmake program name"
@@ -45,6 +45,9 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage("No program name");
 			return;
 		} 
+
+		Command("cmake -B build");
+		Command("cmake --build build");
 			
 		Command(`build/bin/${programName}`);
 	})
