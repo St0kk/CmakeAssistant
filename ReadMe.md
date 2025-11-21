@@ -22,6 +22,11 @@
    - Сборка проекта: `cmake --build build`
    - Запуск программы: `build/bin/${programName}`
 
+## Функции
+1. **Command**
+   - Открывает или создает терминал с названием `ExtCommandTerminal`
+   - Принимает command (string) и отправляет command в качестве команды в терминал
+
 ## Требования
 - Visual Studio Code версии 1.106.0 или выше
 - Установленные CMake, CTest и компилятор C++
